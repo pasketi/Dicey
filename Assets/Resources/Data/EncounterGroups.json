@@ -1,0 +1,10 @@
+{
+	"EncounterGroup" : [
+		{
+			"GroupID" : 0,
+			"GroupName" : "Terrible Fate",
+			"Encounter" : 0,
+			"Active" : true
+		}
+	]
+}

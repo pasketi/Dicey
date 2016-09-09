@@ -1,0 +1,108 @@
+{
+	"Encounter" : [
+		{
+			"ID" : 0,
+			"eName" : "TestEncounter",
+			"NPCPath" : "/",
+			"introText" : "You face a terrible fate",
+			"Actions" : [
+				{
+					"ID" : 0,
+					"title" : "Scare the fate away",
+					"description" : "Try valiantly telling the terrible fate, that you ain't having that shit",
+					"skillCheck" : 2,
+					"skillCheckID" : 15,
+					"challenge" : 2,
+					"challengeTargetID" : 3,
+					"Success" : [
+						{
+							"resultID" : -1,
+							"resultValue" : "0"
+						},
+						{
+							"resultID" : 1,
+							"resultValue" : "You tell the terrible fate to suck it. He starts sobbing uncontrollably, and before you have a chance to apologize, he's already running away. You are a terrible person!"
+						},
+						{
+							"resultID" : 2,
+							"resultValue" : "20"
+						}
+					],
+					"Failure" : [
+						{
+							"resultID" : 0,
+							"resultValue" : "0"
+						},
+						{
+							"resultID" : 1,
+							"resultValue" : "The terrible fate doesn't go anywhere. It just stands there."
+						}
+					]
+				},
+				{
+					"ID" : 1,
+					"title" : "Sneak away",
+					"description" : "Leverage the possibility that the terrible fate didn't yet see you",
+					"skillCheck" : 2,
+					"skillCheckID" : 4,
+					"challenge" : 1,
+					"challengeTargetID" : 0,
+					"Success" : [
+						{
+							"resultID" : -1,
+							"resultValue" : "0"
+						}
+					],
+					"Failure" : [
+						{
+							"resultID" : 0,
+							"resultValue" : "0"
+						},
+						{
+							"resultID" : 1,
+							"resultValue" : "The terrible fate whispers to your ear 'Please. Don't go.' Yikes!"
+						}
+					]
+					
+				},
+				{
+					"ID" : 2,
+					"title" : "Deal with it",
+					"description" : "Lay down and face your fate",
+					"skillCheck" : 0,
+					"skillCheckID" : -1,
+					"challenge" : -1,
+					"challengeTargetID" : -1, 
+					"Success" : [
+						{
+							"resultID" : -1,
+							"resultValue" : "0"
+						},
+						{
+							"resultID" : 1,
+							"resultValue" : "You lie down to wait for something to happen. Much to your surprise the terrible fate felt bad for you and gave you some coins. Good for you!"
+						},
+						{
+							"resultID" : 2,
+							"resultValue" : "10"
+						},
+						{
+							"resultID" : 3,
+							"resultValue" : "5"
+						}
+					],
+					"Failure" : [
+						{
+							"resultID" : -1,
+							"resultValue" : "0"
+						},
+						{
+							"resultID" : 1,
+							"resultValue" : "DEBUG: This shouldn't happen"
+						}
+					]
+				}
+			]
+		}
+	]
+}
