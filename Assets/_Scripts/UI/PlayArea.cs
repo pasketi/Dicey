@@ -17,7 +17,7 @@ public class PlayArea : MonoBehaviour, IDropHandler
             card.used = true;
             card.cardAnimator.SetTrigger("Use");
             card.cardParticle.Play();
-            Debug.Log("Card used");
+            GameManager.Instance.encounter.useAction(card.GetActionID());
         }
     }
 }

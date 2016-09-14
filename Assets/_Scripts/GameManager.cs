@@ -31,8 +31,9 @@ public class GameManager : MonoBehaviour {
 
     public DataController data;
     public EncounterGroup currentEncounterGroup;
-    public GameObject StoryText;
-    public List<BaseAction> actions;
+    public EncounterController encounter;
+    public PlayerCharacter player;
+    public BaseCharacter NPC;
 
     internal bool Initialized;
 
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(this);
         }
-
+        encounter.InitEncounter(0);
         _quitting = false;
     }
 
@@ -59,19 +60,19 @@ public class GameManager : MonoBehaviour {
             data = new DataController();
         }
 
-        InitEncounter(0);
+        if (encounter == null)
+        {
+            encounter = GetComponent<EncounterController>();
+        }
+
+        if (player == null)
+        {
+            player = GetComponent<PlayerCharacter>();
+        }
 
         Initialized = true;
         Debug.Log("GC Init " + Initialized);
 
-    }
-
-    public void InitEncounter(int ID)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            actions[i].SetActionTexts(data.json.GetEncounterActions(ID)[i]);
-        }
     }
 
     public GraphicsHandler InspectedCard { get; private set; }

@@ -7,6 +7,7 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 {
     public Text tTitle, tShort, tFull;
     private string shortDescription = "";
+    private int actionID = -1;
 
     #region Control
     public GraphicsHandler cardStuff;
@@ -32,9 +33,15 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (GameManager.Instance.InspectedCard != null)
             return;
-        Debug.Log(gameObject.name + " ended Drag");
         if (!used)
+        {
             cardAnimator.SetBool("Dragged", false);
+        }
+    }
+
+    public int GetActionID ()
+    {
+        return actionID;
     }
 
     public void Destroy()
@@ -43,11 +50,11 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     }
     #endregion
 
-    public void SetActionTexts(ActionData action)
+    public void SetAction(ActionData action)
     {
+        used = false;
+        actionID = action.ID;
         tTitle.text = action.title;
-
-        Debug.Log(action.skillCheckType.ToString());
 
         if (action.skillCheckType == SkillCheckType.ABILITYCHECK)
         {
@@ -59,8 +66,6 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             shortDescription = "No Check\n";
         }
-
-        Debug.Log(action.challengeType.ToString());
 
         if (action.challengeType == ChallengeType.DC)
         {
