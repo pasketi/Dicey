@@ -7,6 +7,9 @@ public class TextArea : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.Instance.encounter.showActions();
+        if (GameManager.Instance.gameState == GameManager.State.outro)
+            GameManager.Instance.InitRandomEncounterGroup();
+        else
+            GameManager.Instance.encounter.showActions();
     }
 }

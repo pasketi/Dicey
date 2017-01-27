@@ -30,18 +30,21 @@ public class GraphicsHandler : MonoBehaviour, IPointerClickHandler
 
     public void ToggleInspection()
     {
-        _currentTransitionDuration = 0f;
-        if (GameManager.Instance.InspectedCard != this)
+        if (HostCard.cardAnimator.GetBool("Show") == true)
         {
-            GameManager.Instance.InspectCard(this);
-            HostCard.transform.SetParent(_inspectArea);
-            HostCard.cardAnimator.SetBool("Inspected", true);
-        }
-        else if (GameManager.Instance.InspectedCard == this)
-        {
-            GameManager.Instance.ClearInspectedCard();
-            HostCard.transform.SetParent(Holder.transform);
-            HostCard.cardAnimator.SetBool("Inspected", false);
+            _currentTransitionDuration = 0f;
+            if (GameManager.Instance.InspectedCard != this)
+            {
+                GameManager.Instance.InspectCard(this);
+                HostCard.transform.SetParent(_inspectArea);
+                HostCard.cardAnimator.SetBool("Inspected", true);
+            }
+            else if (GameManager.Instance.InspectedCard == this)
+            {
+                GameManager.Instance.ClearInspectedCard();
+                HostCard.transform.SetParent(Holder.transform);
+                HostCard.cardAnimator.SetBool("Inspected", false);
+            }
         }
     }
 

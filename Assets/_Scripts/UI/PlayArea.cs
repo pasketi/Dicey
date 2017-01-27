@@ -14,10 +14,11 @@ public class PlayArea : MonoBehaviour, IDropHandler
 
         if (card != null)
         {
-            card.used = true;
-            card.cardAnimator.SetTrigger("Use");
-            card.cardParticle.Play();
             GameManager.Instance.encounter.useAction(card.GetActionID());
+            card.used = true;
+            card.cardAnimator.SetBool("Use", true);
+            card.cardAnimator.Play("UseCard");
+            card.cardParticle.Play();
         }
     }
 }

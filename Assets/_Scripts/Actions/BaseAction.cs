@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    
     public Text tTitle, tShort, tFull;
     private string shortDescription = "";
     private int actionID = -1;
@@ -46,13 +47,14 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void Destroy()
     {
+        resetAnimator();
         //gameObject.SetActive(false);
     }
     #endregion
 
     public void SetAction(ActionData action)
     {
-        used = false;
+        resetAnimator();
         actionID = action.ID;
         tTitle.text = action.title;
 
@@ -81,5 +83,13 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
         tShort.text = shortDescription;
         tFull.text = action.description;
+    }
+
+    public void resetAnimator()
+    {
+        used = false;
+        cardAnimator.SetBool("Use", false);
+        cardAnimator.SetBool("Dragged", false);
+        cardAnimator.SetBool("Inspected", false);
     }
 }

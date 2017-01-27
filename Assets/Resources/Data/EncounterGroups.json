@@ -1,10 +1,16 @@
 {
-	"EncounterGroup" : [
-		{
-			"GroupID" : 0,
-			"GroupName" : "Terrible Fate",
-			"Encounter" : 0,
-			"Active" : true
-		}
-	]
+    "EncounterGroup" : [
+        {
+            "GroupID": 0,
+            "GroupName": "Terrible Fate",
+            "startEncounter": 0,
+            "Active": true
+        },
+        {
+            "GroupID": 1,
+            "GroupName": "I dont know",
+            "startEncounter": 1,
+            "Active": true
+        }
+    ]
 }

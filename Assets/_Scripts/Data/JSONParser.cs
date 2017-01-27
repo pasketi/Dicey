@@ -24,6 +24,7 @@ public class JSON {
             {
                 ActionData _action = new ActionData();
 
+                _action.ID = data.Encounter[i].Actions[j].ID;
                 _action.title = data.Encounter[i].Actions[j].title;
                 _action.description = data.Encounter[i].Actions[j].description;
                 _action.skillCheck = data.Encounter[i].Actions[j].skillCheck;
@@ -44,12 +45,12 @@ public class JSON {
 
                 _action.Failure = new List<ActionResultData>();
 
-                for (int k = 0; k < data.Encounter[i].Actions[j].Success.Count; k++)
+                for (int k = 0; k < data.Encounter[i].Actions[j].Failure.Count; k++)
                 {
                     ActionResultData _result = new ActionResultData();
 
-                    _result.resultID = data.Encounter[i].Actions[j].Success[k].resultID;
-                    _result.resultValue = data.Encounter[i].Actions[j].Success[k].resultValue;
+                    _result.resultID = data.Encounter[i].Actions[j].Failure[k].resultID;
+                    _result.resultValue = data.Encounter[i].Actions[j].Failure[k].resultValue;
 
                     _action.Failure.Add(_result);
                 }
@@ -69,17 +70,22 @@ public class JSON {
         {
             EncounterGroup _encounterGroup = new EncounterGroup();
 
-            _encounterGroup.gName = data.EncounterGroup[i].gName;
+            _encounterGroup.GroupName = data.EncounterGroup[i].GroupName;
             _encounterGroup.startEncounter = data.EncounterGroup[i].startEncounter;
-            _encounterGroup.active = data.EncounterGroup[i].active;
+            _encounterGroup.Active = data.EncounterGroup[i].Active;
 
-            encounterGroups.Add(data.EncounterGroup[i].ID, _encounterGroup);
+            encounterGroups.Add(data.EncounterGroup[i].GroupID, _encounterGroup);
         }
     }
 
     public Encounter GetEncounter(int ID)
     {
         return encounters[ID];
+    }
+
+    public int CountEncounterGroups()
+    {
+        return encounterGroups.Count;
     }
 
     public EncounterGroup GetEncounterGroup(int ID)
@@ -134,18 +140,19 @@ public class ActionData
 public class ActionResultData
 {
     public int resultID;
+    public string resultValue;
+
     public ResultType result
     {
         get { return (ResultType)resultID; }
     }
-    public string resultValue;
 }
 
 [System.Serializable]
 public class EncounterGroup
 {
-    public int ID;
-    public string gName;
+    public int GroupID;
+    public string GroupName;
     public int startEncounter;
-    public bool active;
+    public bool Active;
 }

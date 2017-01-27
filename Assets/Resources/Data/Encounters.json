@@ -1,108 +1,312 @@
 {
 	"Encounter" : [
-		{
-			"ID" : 0,
-			"eName" : "TestEncounter",
-			"NPCPath" : "/",
-			"introText" : "You face a terrible fate",
-			"Actions" : [
-				{
-					"ID" : 0,
-					"title" : "Scare the fate away",
-					"description" : "Try valiantly telling the terrible fate, that you ain't having that shit",
-					"skillCheck" : 2,
-					"skillCheckID" : 15,
-					"challenge" : 2,
-					"challengeTargetID" : 3,
-					"Success" : [
-						{
-							"resultID" : -1,
-							"resultValue" : "0"
-						},
-						{
-							"resultID" : 1,
-							"resultValue" : "You tell the terrible fate to suck it. He starts sobbing uncontrollably, and before you have a chance to apologize, he's already running away. You are a terrible person!"
-						},
-						{
-							"resultID" : 2,
-							"resultValue" : "20"
-						}
-					],
-					"Failure" : [
-						{
-							"resultID" : 0,
-							"resultValue" : "0"
-						},
-						{
-							"resultID" : 1,
-							"resultValue" : "The terrible fate doesn't go anywhere. It just stands there."
-						}
-					]
-				},
-				{
-					"ID" : 1,
-					"title" : "Sneak away",
-					"description" : "Leverage the possibility that the terrible fate didn't yet see you",
-					"skillCheck" : 2,
-					"skillCheckID" : 4,
-					"challenge" : 1,
-					"challengeTargetID" : 0,
-					"Success" : [
-						{
-							"resultID" : -1,
-							"resultValue" : "0"
-						}
-					],
-					"Failure" : [
-						{
-							"resultID" : 0,
-							"resultValue" : "0"
-						},
-						{
-							"resultID" : 1,
-							"resultValue" : "The terrible fate whispers to your ear 'Please. Don't go.' Yikes!"
-						}
-					]
-					
-				},
-				{
-					"ID" : 2,
-					"title" : "Deal with it",
-					"description" : "Lay down and face your fate",
-					"skillCheck" : 0,
-					"skillCheckID" : -1,
-					"challenge" : -1,
-					"challengeTargetID" : -1, 
-					"Success" : [
-						{
-							"resultID" : -1,
-							"resultValue" : "0"
-						},
-						{
-							"resultID" : 1,
-							"resultValue" : "You lie down to wait for something to happen. Much to your surprise the terrible fate felt bad for you and gave you some coins. Good for you!"
-						},
-						{
-							"resultID" : 2,
-							"resultValue" : "10"
-						},
-						{
-							"resultID" : 3,
-							"resultValue" : "5"
-						}
-					],
-					"Failure" : [
-						{
-							"resultID" : -1,
-							"resultValue" : "0"
-						},
-						{
-							"resultID" : 1,
-							"resultValue" : "DEBUG: This shouldn't happen"
-						}
-					]
-				}
-			]
-		}
+        {
+            "ID": 0,
+            "eName": "TestEncounter",
+            "NPCPath": "/",
+            "introText": "You face a terrible fate",
+            "Actions": [
+                {
+                    "ID": 0,
+                    "title": "Scare the fate away",
+                    "description": "Try valiantly telling the terrible fate, that you ain't having that shit",
+                    "skillCheck": 2,
+                    "skillCheckID": 15,
+                    "challenge": 2,
+                    "challengeTargetID": 3,
+                    "Success": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "You tell the terrible fate to suck it. He starts sobbing uncontrollably, and before you have a chance to apologize, he's already running away. You are a terrible person!"
+                        },
+                        {
+                            "resultID": 2,
+                            "resultValue": "20"
+                        }
+                    ],
+                    "Failure": [
+                        {
+                            "resultID": 0,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "The terrible fate doesn't go anywhere. It just stands there."
+                        }
+                    ]
+                },
+                {
+                    "ID": 1,
+                    "title": "Sneak away",
+                    "description": "Leverage the possibility that the terrible fate didn't yet see you",
+                    "skillCheck": 2,
+                    "skillCheckID": 4,
+                    "challenge": 1,
+                    "challengeTargetID": 0,
+                    "Success": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        }
+                    ],
+                    "Failure": [
+                        {
+                            "resultID": 0,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "The terrible fate whispers to your ear 'Please. Don't go.' Yikes!"
+                        }
+                    ]
+
+                },
+                {
+                    "ID": 2,
+                    "title": "Deal with it",
+                    "description": "Lay down and face your fate",
+                    "skillCheck": 0,
+                    "skillCheckID": -1,
+                    "challenge": -1,
+                    "challengeTargetID": -1,
+                    "Success": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "You lie down to wait for something to happen. Much to your surprise the terrible fate felt bad for you and gave you some coins. Good for you!"
+                        },
+                        {
+                            "resultID": 2,
+                            "resultValue": "10"
+                        },
+                        {
+                            "resultID": 3,
+                            "resultValue": "5"
+                        }
+                    ],
+                    "Failure": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "DEBUG: This shouldn't happen"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ID": 1,
+            "eName": "Enter Encounter name here",
+            "NPCPath": "/",
+            "introText": "This text comes before the encounter",
+            "Actions": [
+                {
+                    "ID": 0,
+                    "title": "Action 1 Title",
+                    "description": "Action 1 flavortext: This is a skillcheck for Intimidate (15) against opponents Will Defence (3)",
+                    "skillCheck": 2,
+                    "skillCheckID": 15,
+                    "challenge": 2,
+                    "challengeTargetID": 3,
+                    "Success": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "This is a success. The encounter ends here. You should also get 20 EXP."
+                        },
+                        {
+                            "resultID": 2,
+                            "resultValue": "20"
+                        }
+                    ],
+                    "Failure": [
+                        {
+                            "resultID": 0,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "This is a Failure. You stay in this encounter."
+                        }
+                    ]
+                },
+                {
+                    "ID": 1,
+                    "title": "Action 2 Title",
+                    "description": "Action 2 flavortext: This is a skill check for stealth (4) against the opponents perception (0).",
+                    "skillCheck": 2,
+                    "skillCheckID": 4,
+                    "challenge": 1,
+                    "challengeTargetID": 0,
+                    "Success": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "This success ends the current encounter."
+                        }
+                    ],
+                    "Failure": [
+                        {
+                            "resultID": 0,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "This failure keeps you in this encounter."
+                        }
+                    ]
+
+                },
+                {
+                    "ID": 2,
+                    "title": "Action 3 Title",
+                    "description": "Action 3 flavortext: AutoSuccess, that takes you to next encounter.",
+                    "skillCheck": 0,
+                    "skillCheckID": -1,
+                    "challenge": -1,
+                    "challengeTargetID": -1,
+                    "Success": [
+                        {
+                            "resultID": 0,
+                            "resultValue": "2"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "This success takes you to encounter ID 2 while showing this text. This should also give 10 EXP and 5 Gold."
+                        },
+                        {
+                            "resultID": 2,
+                            "resultValue": "10"
+                        },
+                        {
+                            "resultID": 3,
+                            "resultValue": "5"
+                        }
+                    ],
+                    "Failure": [
+                        {
+                            "resultID": -1,
+                            "resultValue": "0"
+                        },
+                        {
+                            "resultID": 1,
+                            "resultValue": "This failure ends the encounter group. It just ends. This never should happen, since the action is an auto success."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+        	"ID" : 2,
+        	"eName" : "Test 2",
+        	"NPCPath" : "/",
+        	"introText" : "Get fukd",
+        	"Actions" : [
+        		{
+        			"ID" : 0,
+        			"title" : "Fukboii",
+        			"description" : "Shiit",
+        			"skillCheck" : -1,
+        			"skillCheckID" : -1,
+        			"challenge" : -1,
+        			"challengeTargetID" : -1,
+        			"Success" : [
+        				{
+        					"resultID" : -1,
+        					"resultValue" : "0"
+        				}
+        			],
+        			"Failure" : [
+        				{
+        					"resultID" : -1,
+        					"resultValue" : "0"
+        				},
+        				{
+        					"resultID" : 1,
+        					"resultValue" : "You fukd."
+        				}
+        			]
+        		},
+        		{
+        			"ID" : 1,
+        			"title" : "Fak U",
+        			"description" : "Oh dayum!",
+        			"skillCheck" : 1,
+        			"skillCheckID" : 0,
+        			"challenge" : 0,
+        			"challengeTargetID" : 10,
+        			"Success" : [
+        				{
+        					"resultID" : -1,
+        					"resultValue" : "0"
+        				},
+        				{
+        					"resultID" : 1,
+        					"resultValue" : "Success: You fukd"
+        				}
+        			],
+        			"Failure" : [
+        				{
+        					"resultID" : 0,
+        					"resultValue" : "0"
+        				},
+        				{
+        					"resultID" : 1,
+        					"resultValue" : "Failure: Try to fuk again!"
+        				}
+        			]
+        			
+        		},
+        		{
+        			"ID" : 2,
+        			"title" : "Fuk this",
+        			"description" : "gtfo",
+        			"skillCheck" : 2,
+        			"skillCheckID" : 14,
+        			"challenge" : 2,
+        			"challengeTargetID" : 3, 
+        			"Success" : [
+        				{
+        					"resultID" : -1,
+        					"resultValue" : "0"
+        				},
+        				{
+        					"resultID" : 1,
+        					"resultValue" : "Success: You gtfo successfully."
+        				}
+        			],
+        			"Failure" : [
+        				{
+        					"resultID" : -1,
+        					"resultValue" : "0"
+        				},
+                        {
+                            "resultID": 1,
+                            "resultValue": "Failure: He won't let you gtfo without a kiss and kicks you into ballz"
+                        },
+                        {
+                            "resultID": 4,
+                            "resultValue": "1"
+                        }
+        			]
+        		}
+        	]
+        }
 	]
 }

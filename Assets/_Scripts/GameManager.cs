@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour {
     private static bool _quitting;
     #endregion
 
+    public enum State : int
+    {
+        intro = 0,
+        choise = 1,
+        outro = 2
+    }
+
+    public State gameState;
     public DataController data;
     public EncounterGroup currentEncounterGroup;
     public EncounterController encounter;
@@ -49,7 +57,8 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(this);
         }
-        encounter.InitEncounter(0);
+        gameState = State.intro;
+        InitRandomEncounterGroup();
         _quitting = false;
     }
 
@@ -75,6 +84,13 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void InitRandomEncounterGroup()
+    {
+        gameState = State.intro;
+        currentEncounterGroup = data.json.GetEncounterGroup(Random.Range((int)0, data.json.CountEncounterGroups()));
+        encounter.InitEncounter(currentEncounterGroup.startEncounter);
+    }
+
     public GraphicsHandler InspectedCard { get; private set; }
 
     public void InspectCard(GraphicsHandler Card)
@@ -82,7 +98,6 @@ public class GameManager : MonoBehaviour {
         if (InspectedCard != null)
         {
             InspectedCard.ToggleInspection();
-
         }
         InspectedCard = Card;
     }

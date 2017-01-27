@@ -34,9 +34,12 @@ public class EncounterController : MonoBehaviour {
     public void showActions ()
     {
         HideMessage();
+        GameManager.Instance.gameState = GameManager.State.choise;
         foreach (BaseAction action in actions)
         {
-            action.cardAnimator.SetTrigger("Show");
+            action.cardAnimator.SetBool("Show", true);
+            action.cardAnimator.SetBool("Hide", false);
+
         }
     }
 
@@ -44,7 +47,8 @@ public class EncounterController : MonoBehaviour {
     {
         foreach (BaseAction action in actions)
         {
-            action.cardAnimator.SetTrigger("Hide");
+            action.cardAnimator.SetBool("Show", false);
+            action.cardAnimator.SetBool("Hide", true);
         }
     }
 
@@ -78,6 +82,7 @@ public class EncounterController : MonoBehaviour {
         int target = 0;
         int result = 0;
         hideActions();
+        int dieRoll = 0;
         switch (action.skillCheckType)
         {
             case SkillCheckType.AUTOSUCCESS:
@@ -115,20 +120,22 @@ public class EncounterController : MonoBehaviour {
                     Debug.LogError("BAD HAPPEN IN CHALLENGE SWITCH");
                     break;
             }
-            int dieRoll = Dice.Roll(dice);
+            dieRoll = Dice.Roll(dice);
+            Debug.Log("Dieroll: " + dieRoll);
             result = (dieRoll >= target ? 1 : -1);
-            //Debug.Log("DEGUB: " + dice + " " + dieRoll + " " + target + " " + action.skillCheckType.ToString() + " " + action.challengeType.ToString() + " " + result);
         }
-
-        
 
         switch (result)
         {
             case 1:
                 parseResult(action.Success);
+                Debug.Log("Action #" + action.ID + " - Success");
+                //Debug.Log("DEGUB: " + dice + " " + dieRoll + " > " + target + " " + action.skillCheckType.ToString() + " " + action.challengeType.ToString() + " " + result);
                 break;
             case -1:
                 parseResult(action.Failure);
+                Debug.Log("Action #" + action.ID + " - Failure");
+                //Debug.Log("DEGUB: " + dice + " " + dieRoll + " < " + target + " " + action.skillCheckType.ToString() + " " + action.challengeType.ToString() + " " + result);
                 break;
             default:
                 Debug.LogError("BAD HAPPEN IN RESULT SWITCH");
@@ -136,12 +143,13 @@ public class EncounterController : MonoBehaviour {
         }
     }
 
-    public void parseResult (List<ActionResultData> results)
+    public void parseResult(List<ActionResultData> results)
     {
         int nextEncounter = -2;
         bool msgShown = false;
         foreach (ActionResultData result in results)
         {
+            Debug.Log("ResultID: " + result.resultID + " -- Value: " + result.resultValue);
             switch (result.resultID)
             {
                 case -1:
@@ -149,8 +157,8 @@ public class EncounterController : MonoBehaviour {
                     nextEncounter = -1;
                     break;
                 case 0:
-                    Debug.Log("Next Encounter: " + nextEncounter);
                     nextEncounter = int.Parse(result.resultValue);
+                    Debug.Log("Next Encounter: " + nextEncounter);
                     break;
                 case 1:
                     ShowMessage(result.resultValue);
@@ -179,9 +187,24 @@ public class EncounterController : MonoBehaviour {
         }
 
         if (nextEncounter >= 0)
+        {
+            Debug.Log("Next encounter: #" + nextEncounter + " - EncounterName: " + GameManager.Instance.data.json.GetEncounter(nextEncounter).eName);
             InitEncounter(nextEncounter, !msgShown);
+            GameManager.Instance.gameState = GameManager.State.intro;
+        }
         else if (nextEncounter == -1)
-            InitEncounter(0, !msgShown);
+        {
+            Debug.Log("Encountergroup ended");
+            GameManager.Instance.gameState = GameManager.State.outro;
+            if (!msgShown)
+                GameManager.Instance.InitRandomEncounterGroup();
+            // TODO: Finish this!
+        }
+        else
+        {
+            Debug.LogError("Shieet wait what?");
+            GameManager.Instance.InitRandomEncounterGroup();
+        }
     }
 
 }

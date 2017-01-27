@@ -1,0 +1,424 @@
+
+Save New Duplicate & Edit Just Text Twitter
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+// HOW TO USE:
+// 1. Give a name for your Encounter group
+// 2. Fill in the "eName" (encounterName) and "introText" for your encounter. If making an additional encounter, increment the encounter ID
+// 3. Setup actions
+// 4. Set action name
+// 5. Set action flavortext ("description"). This is NOT tied to any functionality.
+// 6. Set skill checks and challenges using the attached reference
+// 7. Set success and failure actions (You may add and remove, just keep a single resultID 0 or -1 present)
+// 8. Repeat steps 4-7 for all 3 actions
+// 9. Copy the encounter template and repeat steps 2-8 to any additional encounters you may want to add to the group
+// 10. Save and deliver to Pasketi. It's his headache now.
+
+
+// Encounter Group Template (One per group, a group can have multiple encounters, but only a single starting point)
+
+{
+	"GroupID": 0,				// Next available integer, set to whatever you want (integer)
+	"GroupName": "I dont know",	// Group name. Set to descriptive. (string)
+	"startEncounter": 1, 		// Set to first encounters ID (integer)
+	"Active": true				// Is the encounter part of the randomizer (true/false)
+}
+
+// Encounter Template
+
+{
+	"ID" : 0, // Next available integer, set to whatever you want
+	"eName" : "Enter Encounter name here",
+	"NPCPath" : "/",
+	"introText" : "This text comes before the encounter",
+	"Actions" : [
+		{
+			"ID" : 0,
+			"title" : "Action 1 Title",
+			"description" : "Action 1 flavortext: This is a skillcheck for Intimidate (15) against opponents Will Defence (3)",
+			"skillCheck" : 2,
+			"skillCheckID" : 15,
+			"challenge" : 2,
+			"challengeTargetID" : 3,
+			"Success" : [
+				{
+					"resultID" : -1,
+					"resultValue" : "0"
+				},
+				{
+					"resultID" : 1,
+					"resultValue" : "This is a success. The encounter ends here. You should also get 20 EXP."
+				},
+				{
+					"resultID" : 2,
+					"resultValue" : "20"
+				}
+			],
+			"Failure" : [
+				{
+					"resultID" : 0,
+					"resultValue" : "0"
+				},
+				{
+					"resultID" : 1,
+					"resultValue" : "This is a Failure. You stay in this encounter."
+				}
+			]
+		},
+		{
+			"ID" : 1,
+			"title" : "Action 2 Title",
+			"description" : "Action 2 flavortext: This is a skill check for stealth (4) against the opponents perception (0).",
+			"skillCheck" : 2,
+			"skillCheckID" : 4,
+			"challenge" : 1,
+			"challengeTargetID" : 0,
+			"Success" : [
+				{
+					"resultID" : -1,
+					"resultValue" : "0"
+				},
+				{
+					"resultID" : 1,
+					"resultValue" : "This success ends the current encounter."
+				}
+			],
+			"Failure" : [
+				{
+					"resultID" : 0,
+					"resultValue" : "0"
+				},
+				{
+					"resultID" : 1,
+					"resultValue" : "This failure keeps you in this encounter."
+				}
+			]
+			
+		},
+		{
+			"ID" : 2,
+			"title" : "Action 3 Title",
+			"description" : "Action 3 flavortext: AutoSuccess, that takes you to next encounter.",
+			"skillCheck" : 0,
+			"skillCheckID" : -1,
+			"challenge" : -1,
+			"challengeTargetID" : -1, 
+			"Success" : [
+				{
+					"resultID" : 0,
+					"resultValue" : "2"
+				},
+				{
+					"resultID" : 1,
+					"resultValue" : "This success takes you to another encounter while showing this text. This should also give 10 EXP and 5 Gold."
+				},
+				{
+					"resultID" : 2,
+					"resultValue" : "10"
+				},
+				{
+					"resultID" : 3,
+					"resultValue" : "5"
+				}
+			],
+			"Failure" : [
+				{
+					"resultID" : -1,
+					"resultValue" : "0"
+				},
+				{
+					"resultID" : 1,
+					"resultValue" : "This failure ends the encounter group. It just ends. This never should happen, since the action is an auto success."
+				}
+			]
+		}
+	]
+}
+
+// Below you will find the identifiers for different skills and valuetypes.
+
+public enum AbilityID : int		// If "skillCheck" is "1", these are used as "skillCheckID" (skill used by the player)
+{
+    Strength = 0,
+    Dexterity = 1,
+    Constitution = 2,
+    Intelligence = 3,
+    Wisdom = 4,
+    Charisma = 5
+}
+
+public enum DefenceID : int		// If "challenge" is "2", these are used as "skillCheckTargetID" (skill used by the opponent)
+{
+    ArmorClass = 0,
+    Fortitude = 1,
+    Reflex = 2,
+    Will = 3
+}
+
+public enum SkillID : int		// If "skillCheck" is "2", these are used as "skillCheckID" (skill used by the player) and if "challenge" is "1", these are used as "skillCheckTargetID" (skill used by the opponent)
+{
+    // 0 is reserved for Perception and 1 for Insight, both are WIS based
+    Perception = 0,
+    Insight = 1,
+
+    //STR
+    Athletics = 2,
+    //DEX
+    Acrobatics = 3,
+    Stealth = 4,
+    Thievery = 5,
+    //CON
+    Endurance = 6,
+    //INT
+    Arcana = 7,
+    History = 8,
+    Religion = 9,
+    //WIS
+    Dungeoneering = 10,
+    Heal = 11,
+    Nature = 12,
+    //CHA
+    Bluff = 13,
+    Diplomacy = 14,
+    Intimidate = 15,
+    Streetwise = 16
+}
+
+public enum SkillCheckType : int  // These are all different types of skill checks. Used as "skillCheck" value
+{
+    AUTOFAIL = -1,		// No shit
+    AUTOSUCCESS = 0,	// No shit
+    ABILITYCHECK = 1,	// Use an abilityscore for a check
+    SKILLCHECK = 2		// Use a skillbonus for a check
+}
+
+public enum ChallengeType : int   // Used as "challenge" value
+{
+    NONE = -1,			// On Autofail or -success use this as a challengeType
+    DC = 0,				// If you use DC, you can decide the Difficulty Check yourself
+    NPCSKILL = 1,		// Use the opposing NPC's skill (SkillID) for a DC check
+    NPCDEFENCE = 2		// Use the opposing NPC's defence (DefenceID) for a DC check
+}
+
+public enum ResultType : int      // Used as "ResultID" value
+{
+    ENDENCOUNTER = -1,	// Ends encounter group (Value: 0)
+    NEXTENCOUNTER = 0,	// Next encounter will be a specific encounter (Value: Encounter ID)
+
+    // You should have either -1 or 0 as a part of results
+
+    MESSAGE = 1,		// Show an additional message before next encounter
+    EXPERIENCE = 2,		// Modify the PC experience (Value: Positive or negative integer, stands for experience amount)
+    GOLD = 3,			// Modify the PC gold amount (Value: Positive or negative integer, stands for gold amount)
+    DAMAGE = 4,			// Modify the PC health (Value: Positive integer, stands for amount of damage)
+    HEAL = 5			// Modify the PC health (Value: Positive integer, stands for healed HP amount)
+}
