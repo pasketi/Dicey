@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
@@ -7,6 +8,9 @@ public class GraphicsHandler : MonoBehaviour, IPointerClickHandler
 {
     public BaseAction HostCard;
     public Transform Holder;
+    public Image NPC, LeftStage, RightStage;
+    public Animator LeftStageAnimator, RightStageAnimator;
+    public Animator PlayerAnimator, NPCAnimator;
 
     private RectTransform _myRect;
     private RectTransform _inspectArea;
@@ -26,6 +30,58 @@ public class GraphicsHandler : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         ToggleInspection();
+    }
+
+    public void SwitchStage(int id)
+    {
+        if (LeftStageAnimator.GetBool("OnStage") == false)
+        {
+            Debug.Log("Switching stage to " + id);
+        }
+        else
+        {
+            Debug.LogError("COULD NOT SWITCH STAGE! STAGE IS VISIBLE!");
+        }
+    }
+
+    public void SwitchNPC(int id)
+    {
+        if (NPCAnimator.GetBool("OnStage") == false)
+        {
+            Debug.Log("Switching NPC to " + id);
+        }
+        else
+        {
+            Debug.LogError("COULD NOT SWITCH NPC! NPC IS VISIBLE!");
+        }
+    }
+
+    public void HideStage()
+    {
+        if (LeftStageAnimator.GetBool("OnStage") == true)
+            LeftStageAnimator.Play("FromStage");
+        if (RightStageAnimator.GetBool("OnStage") == true)
+            RightStageAnimator.Play("FromStage");
+    }
+
+    public void ShowStage()
+    {
+        if (LeftStageAnimator.GetBool("OnStage") == false)
+            LeftStageAnimator.Play("ToStage");
+        if (RightStageAnimator.GetBool("OnStage") == false)
+            RightStageAnimator.Play("ToStage");
+    }
+
+    public void HideNPC()
+    {
+        if (NPCAnimator.GetBool("OnStage") == true)
+            NPCAnimator.Play("FromStage");
+    }
+
+    public void ShowNPC()
+    {
+        if (NPCAnimator.GetBool("OnStage") == false)
+            NPCAnimator.Play("ToStage");
     }
 
     public void ToggleInspection()
