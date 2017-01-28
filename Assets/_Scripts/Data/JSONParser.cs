@@ -17,6 +17,7 @@ public class JSON {
 
             _encounter.eName = data.Encounter[i].eName;
             _encounter.NPCPath = data.Encounter[i].NPCPath;
+            _encounter.StagePath = data.Encounter[i].StagePath;
             _encounter.introText = data.Encounter[i].introText;
             _encounter.Actions = new List<ActionData>();
 
@@ -106,6 +107,7 @@ public class Encounter
     public int ID;
     public string eName;
     public string NPCPath;
+    public string StagePath;
     public string introText;
     public List<ActionData> Actions;
 }

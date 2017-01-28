@@ -11,7 +11,7 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private int actionID = -1;
 
     #region Control
-    public GraphicsHandler cardStuff;
+    public CardGraphicsHandler cardStuff;
     public Animator cardAnimator;
     public ParticleSystem cardParticle;
     public bool used = false;
@@ -60,10 +60,10 @@ public class BaseAction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (action.skillCheckType == SkillCheckType.ABILITYCHECK)
         {
-            shortDescription = ((SkillID)action.skillCheckID).ToString() + " check\n";
+            shortDescription = ((AbilityID)action.skillCheckID).ToString() + " check\n";
         } else if (action.skillCheckType == SkillCheckType.SKILLCHECK)
         {
-            shortDescription = ((AbilityID)action.skillCheckID).ToString() + " check\n";
+            shortDescription = ((SkillID)action.skillCheckID).ToString() + " check\n";
         } else if (action.skillCheckType == SkillCheckType.AUTOFAIL || action.skillCheckType == SkillCheckType.AUTOSUCCESS)
         {
             shortDescription = "No Check\n";

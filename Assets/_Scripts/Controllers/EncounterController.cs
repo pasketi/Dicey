@@ -17,6 +17,9 @@ public class EncounterController : MonoBehaviour {
     public BoxCollider2D StoryCollider;
     public List<BaseAction> actions;
     public int CurrentEncounter;
+    public Transform NPCHost;
+    private GameObject NPC, currentNPCPrefab;
+    private Sprite currentStage;
 
     void Awake ()
     {
@@ -25,6 +28,34 @@ public class EncounterController : MonoBehaviour {
     public bool InitEncounter(int encounterID, bool showIntroText = true)
     {
         CurrentEncounter = encounterID;
+
+        string newNPCPath = "NPCs\\" + GameManager.Instance.data.json.GetEncounter(CurrentEncounter).NPCPath;
+        GameObject newNPC = Resources.Load<GameObject>(newNPCPath);
+        if (currentNPCPrefab != newNPC || NPC == null)
+        {
+            DestroyImmediate(NPC, true);
+            currentNPCPrefab = newNPC;
+            NPC = Instantiate<GameObject>(currentNPCPrefab);
+            NPC.transform.SetParent(NPCHost);
+            StartCoroutine(GameManager.Instance.SwitchNPC(NPC.GetComponent<NPCCharacter>()));
+        }
+        else
+        {
+            newNPC = null;
+        }
+
+        string newStagePath = "Stages\\" + GameManager.Instance.data.json.GetEncounter(CurrentEncounter).StagePath;
+        Sprite newStage = Resources.Load<Sprite>(newStagePath);
+        if (currentStage != newStage || currentStage == null)
+        {
+            currentStage = newStage;
+            StartCoroutine(GameManager.Instance.SwitchStage(currentStage));
+        }
+        else
+        {
+            newStage = null;
+        }
+
         SetActions();
         if (showIntroText)
             ShowMessage(GameManager.Instance.data.json.GetEncounter(CurrentEncounter).introText);
@@ -152,6 +183,10 @@ public class EncounterController : MonoBehaviour {
             Debug.Log("ResultID: " + result.resultID + " -- Value: " + result.resultValue);
             switch (result.resultID)
             {
+                case -2:
+                    Debug.Log("Combat Encounter! Not yet implemented, so end encounter.");
+                    nextEncounter = -1;
+                    break;
                 case -1:
                     Debug.Log("End Encounter");
                     nextEncounter = -1;

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour {
     public EncounterController encounter;
     public PlayerCharacter player;
     public BaseCharacter NPC;
+
+    public Image NPCImage, LeftStage, RightStage;
+    public Text NPCName;
+    public Animator LeftStageAnimator, RightStageAnimator;
+    public Animator PlayerAnimator, NPCAnimator;
 
     internal bool Initialized;
 
@@ -91,9 +97,64 @@ public class GameManager : MonoBehaviour {
         encounter.InitEncounter(currentEncounterGroup.startEncounter);
     }
 
-    public GraphicsHandler InspectedCard { get; private set; }
+    public IEnumerator SwitchStage(Sprite StageImage)
+    {
+        Debug.Log("Switching Stage to " + StageImage.name);
+        LeftStageAnimator.SetBool("OnStage", false);
+        RightStageAnimator.SetBool("OnStage", false);
+        do
+        {
+            if (LeftStageAnimator.GetCurrentAnimatorStateInfo(0).IsName("OffStage") &&
+                RightStageAnimator.GetCurrentAnimatorStateInfo(0).IsName("OffStage"))
+            {
+                LeftStage.sprite = StageImage;
+                RightStage.sprite = StageImage;
+                LeftStageAnimator.SetBool("OnStage", true);
+                RightStageAnimator.SetBool("OnStage", true);
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        } while (!LeftStageAnimator.GetBool("OnStage") && !RightStageAnimator.GetBool("OnStage"));
+        yield return true;
+    }
 
-    public void InspectCard(GraphicsHandler Card)
+    public IEnumerator SwitchNPC(NPCCharacter NPCScript)
+    {
+        Debug.Log("Switching NPC to " + NPCScript._characterName);
+        NPCAnimator.SetBool("OnStage", false);
+        do
+        {
+            if (NPCAnimator.GetCurrentAnimatorStateInfo(0).IsName("OffStage"))
+            {
+                NPCImage.sprite = NPCScript.GetNPCSprite;
+                NPCName.text = NPCScript._characterName;
+                NPCAnimator.SetBool("OnStage", true);
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        } while (!NPCAnimator.GetBool("OnStage"));
+        yield return true;
+    }
+
+    public void HideStage()
+    {
+        LeftStageAnimator.SetBool("OnStage", false);
+        RightStageAnimator.SetBool("OnStage", false);
+    }
+
+    public void ShowStage()
+    {
+        LeftStageAnimator.SetBool("OnStage", true);
+        RightStageAnimator.SetBool("OnStage", true);
+    }
+
+    public CardGraphicsHandler InspectedCard { get; private set; }
+
+    public void InspectCard(CardGraphicsHandler Card)
     {
         if (InspectedCard != null)
         {

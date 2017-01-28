@@ -1,219 +1,6 @@
-
-Save New Duplicate & Edit Just Text Twitter
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
 // HOW TO USE:
 // 1. Give a name for your Encounter group
-// 2. Fill in the "eName" (encounterName) and "introText" for your encounter. If making an additional encounter, increment the encounter ID
+// 2. Fill in the "eName" (encounterName), "NPCPath", "StagePath" and "introText" for your encounter. If making an additional encounter, increment the encounter ID
 // 3. Setup actions
 // 4. Set action name
 // 5. Set action flavortext ("description"). This is NOT tied to any functionality.
@@ -238,7 +25,8 @@ Save New Duplicate & Edit Just Text Twitter
 {
 	"ID" : 0, // Next available integer, set to whatever you want
 	"eName" : "Enter Encounter name here",
-	"NPCPath" : "/",
+	"NPCPath" : "Granny",		// Put the name of the NPC here, and then get me a picture of them. Otherwise it's gonna look like a grandma
+	"StagePath" : "Forest",		// Make up some stages. It's my headache to make them, before final graphics are figured out.
 	"introText" : "This text comes before the encounter",
 	"Actions" : [
 		{
@@ -411,14 +199,15 @@ public enum ChallengeType : int   // Used as "challenge" value
 
 public enum ResultType : int      // Used as "ResultID" value
 {
-    ENDENCOUNTER = -1,	// Ends encounter group (Value: 0)
-    NEXTENCOUNTER = 0,	// Next encounter will be a specific encounter (Value: Encounter ID)
+	COMBATENCOUNTER = -2,	// Starts a combat encounter! Uses separate JSON template for combat rewards (maybe? i don't know)
+    ENDENCOUNTER = -1,		// Ends encounter group (Value: 0)
+    NEXTENCOUNTER = 0,		// Next encounter will be a specific encounter (Value: Encounter ID)
 
     // You should have either -1 or 0 as a part of results
 
-    MESSAGE = 1,		// Show an additional message before next encounter
-    EXPERIENCE = 2,		// Modify the PC experience (Value: Positive or negative integer, stands for experience amount)
-    GOLD = 3,			// Modify the PC gold amount (Value: Positive or negative integer, stands for gold amount)
-    DAMAGE = 4,			// Modify the PC health (Value: Positive integer, stands for amount of damage)
-    HEAL = 5			// Modify the PC health (Value: Positive integer, stands for healed HP amount)
+    MESSAGE = 1,			// Show an additional message before next encounter
+    EXPERIENCE = 2,			// Modify the PC experience (Value: Positive or negative integer, stands for experience amount)
+    GOLD = 3,				// Modify the PC gold amount (Value: Positive or negative integer, stands for gold amount)
+    DAMAGE = 4,				// Modify the PC health (Value: Positive integer, stands for amount of damage)
+    HEAL = 5				// Modify the PC health (Value: Positive integer, stands for healed HP amount)
 }

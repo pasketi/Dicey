@@ -6,15 +6,23 @@ public class BaseCharacter : MonoBehaviour {
 
     public string _characterName = "John Doe";
     public RaceID _characterRace = RaceID.Human;
+
+    [SerializeField]
     protected int _level = 1;
-    protected int _experience = 0;
+    [SerializeField]
     protected int[] _abilityScores = new int[6];
+    [SerializeField]
     protected int[] _defences = new int[4];
+    [SerializeField]
     protected bool[] _trainedSkills = new bool[17];
+    [SerializeField]
     protected int _maxHealth = 0;
+    [SerializeField]
+    protected int _experience = 0;                    // On player stands for experience gathered. On NPC, stands for XP gain
+
     protected int _currentHealth = 0;
 
-    void Init ()
+    protected virtual void Init ()
     {
         //Ability scores
         CreateCharacter(_characterRace);

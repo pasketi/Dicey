@@ -1,4 +1,4 @@
-﻿public enum AbilityID : int
+﻿public enum AbilityID : int		// If "skillCheck" is "1", these are used as "skillCheckID" (skill used by the player)
 {
     Strength = 0,
     Dexterity = 1,
@@ -8,7 +8,7 @@
     Charisma = 5
 }
 
-public enum DefenceID : int
+public enum DefenceID : int		// If "challenge" is "2", these are used as "skillCheckTargetID" (skill used by the opponent)
 {
     ArmorClass = 0,
     Fortitude = 1,
@@ -73,7 +73,7 @@ public enum AttTypeID : int
     CLOSE = 4       // NOT USED, USE AREA
 }
 
-public enum SkillID : int
+public enum SkillID : int	// If "skillCheck" is "2", these are used as "skillCheckID" (skill used by the player) and if "challenge" is "1", these are used as "skillCheckTargetID" (skill used by the opponent)
 {
     // 0 is reserved for Perception and 1 for Insight, both are WIS based
     Perception = 0,
@@ -102,29 +102,33 @@ public enum SkillID : int
     Streetwise = 16
 }
 
-public enum SkillCheckType : int
+public enum SkillCheckType : int  // These are all different types of skill checks. Used as "skillCheck" value
 {
-    AUTOFAIL = -1,
-    AUTOSUCCESS = 0,
-    ABILITYCHECK = 1,
-    SKILLCHECK = 2
+    AUTOFAIL = -1,		// No shit
+    AUTOSUCCESS = 0,	// No shit
+    ABILITYCHECK = 1,	// Use an abilityscore for a check
+    SKILLCHECK = 2		// Use a skillbonus for a check
 }
 
-public enum ChallengeType : int
+public enum ChallengeType : int   // Used as "challenge" value
 {
-    NONE = -1,
-    DC = 0,
-    NPCSKILL = 1,
-    NPCDEFENCE = 2
+    NONE = -1,			// On Autofail or -success use this as a challengeType
+    DC = 0,				// If you use DC, you can decide the Difficulty Check yourself
+    NPCSKILL = 1,		// Use the opposing NPC's skill (SkillID) for a DC check
+    NPCDEFENCE = 2		// Use the opposing NPC's defence (DefenceID) for a DC check
 }
 
-public enum ResultType : int
+public enum ResultType : int      // Used as "ResultID" value
 {
-    ENDENCOUNTER = -1,
-    NEXTENCOUNTER = 0,
-    MESSAGE = 1,
-    EXPERIENCE = 2,
-    GOLD = 3,
-    DAMAGE = 4,
-    HEAL = 5
+    COMBATENCOUNTER = -2,	// Starts a combat encounter! Uses separate JSON template for combat rewards (maybe? i don't know)
+    ENDENCOUNTER = -1,	    // Ends encounter group (Value: 0)
+    NEXTENCOUNTER = 0,	    // Next encounter will be a specific encounter (Value: Encounter ID)
+
+    // You should have either -1 or 0 as a part of results
+
+    MESSAGE = 1,		    // Show an additional message before next encounter
+    EXPERIENCE = 2,		    // Modify the PC experience (Value: Positive or negative integer, stands for experience amount)
+    GOLD = 3,			    // Modify the PC gold amount (Value: Positive or negative integer, stands for gold amount)
+    DAMAGE = 4,			    // Modify the PC health (Value: Positive integer, stands for amount of damage)
+    HEAL = 5			    // Modify the PC health (Value: Positive integer, stands for healed HP amount)
 }

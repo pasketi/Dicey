@@ -3,7 +3,8 @@
         {
             "ID": 0,
             "eName": "TestEncounter",
-            "NPCPath": "/",
+            "NPCPath": "Granny",
+            "StagePath": "City",
             "introText": "You face a terrible fate",
             "Actions": [
                 {
@@ -107,7 +108,8 @@
         {
             "ID": 1,
             "eName": "Enter Encounter name here",
-            "NPCPath": "/",
+            "NPCPath": "Granny",
+            "StagePath": "Forest",
             "introText": "This text comes before the encounter",
             "Actions": [
                 {
@@ -215,7 +217,8 @@
         {
         	"ID" : 2,
         	"eName" : "Test 2",
-        	"NPCPath" : "/",
+            "NPCPath": "Miquel",
+            "StagePath": "City",
         	"introText" : "Get fukd",
         	"Actions" : [
         		{
